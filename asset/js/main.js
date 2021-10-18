@@ -120,10 +120,8 @@ function GetTrending(URL,path){
         let htmls=items.results.slice(0,14).map(function(item,idx){
             return `
             <li id="${item.id}" class="section-trending-item moive-item col l-2 m-3 c-6" >
-             <div class="section-trending-img" style="background-image: url(https://image.tmdb.org/t/p/w500${item.poster_path});"></div>
-             <div class="overview-contend">
-             ${item.name}
-             </br>${item.overview}</div>
+             <div class="section-trending-img" style="background-image: url(https://image.tmdb.org/t/p/original${item.poster_path});"></div>
+             <div class="overview-contend"><i class="fas fa-play-circle"></i></div>
             </li> 
             
             `
@@ -184,7 +182,7 @@ function GetTvShow(URL,path){
 function GetMovie(id){
 
 
-
+    console.log(`${BASE_URL}/discover/movie?sort_by=popularity.desc&${api_key}&page=${currentpage}`)
     fetch(`${BASE_URL}/discover/movie?sort_by=popularity.desc&${api_key}&page=${currentpage}`).then(function(res){
         return res.json();
     })
@@ -222,8 +220,10 @@ function GetMovie(id){
        })
        Movie_Geners.innerHTML=htmls.join('');
     })
+   
+    
 }
-
+ControlPage(GetMovie);
 function ControlPage(Callback){
     
     NextBtn.onclick=function(){
@@ -435,3 +435,4 @@ function FooterItem(){
         }
     })
 }
+

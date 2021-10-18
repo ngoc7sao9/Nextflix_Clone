@@ -5,7 +5,7 @@
 }
 ::-webkit-scrollbar {
     width: 0;
-    height: 8px;
+    height: 10px;
   }
   ::-webkit-scrollbar-track {
     background: #f1f1f1;
@@ -329,45 +329,56 @@ header .nav-left .user-profile .user-profile-subnav .user-profile-subnab-item:ho
 
 .trending .section-trending-list .section-trending-item{
     height: 300px;
-    margin: 0 10px;
+    /* margin: 0 10px; */
     position: relative;
     overflow: hidden;
+
     /* background-color: rebeccapurple; */
 }
 .trending .section-trending-list .section-trending-item .section-trending-img{
     height: 100%;
     width: 100%;
-
+    background-position: center;
     background-size: cover;
 }
 
 .trending .section-trending-list .section-trending-item .overview-contend{
-    width: 100%;
+    /* width: 100%; */
     position: absolute;
     bottom: 0;
-    height: 150px;
+    overflow: hidden;
+    padding: 15px;
+    height: 100%;
+    width: 100%;
+    display: flex;
     /* display: none; */
-    transform: translateY(100%);
-    background-color: #fff;
+    align-items: center;
+    justify-content: center;
+    background: rgb(25,25,25);
+    background: linear-gradient(83deg, rgba(25,25,25,0.6505952722886029) 24%, rgba(246,241,241,0) 58%);
     word-wrap: break-word;
    font-size: 2.5rem;
    font-weight: 400;
    overflow-y: auto;
    line-height: 4rem;
--webkit-line-clamp: 3;
-overflow-wrap: break-word;
-text-overflow: ellipsis;
+    -webkit-line-clamp: 3;
+    overflow-wrap: break-word;
+    text-overflow: ellipsis;
+    display: none;
 
 }
-.trending .section-trending-list .section-trending-item .overview-contend::first-line{
-    font-size: 3.5rem;
+.trending .section-trending-list .section-trending-item .overview-contend i{
+    font-size: 5rem;
     font-weight: 500;
 }
-.trending .section-trending-list .section-trending-item:hover .overview-contend{
-    display: block;
+.trending .section-trending-list .section-trending-item:hover .overview-contend {
+    color: rgb(182, 174, 174);
+    /* animation: ZoomIn ease-in-out 400ms; */
     cursor: pointer;
+    animation: FadeOut ease-in-out 400ms;
+    display: flex;
 
-    animation: Pull ease-in-out 500ms forwards;
+   
 }
 
 @keyframes Pull{
@@ -512,7 +523,7 @@ text-overflow: ellipsis;
 .Container .gener-pagination{
     margin: 5px 0;
     height: var(--header-height);
-    display: none;
+    display: flex;
     align-items: center;
     font-size: 4rem;
     color: #fff;
@@ -791,3 +802,4 @@ footer .footer-list .footer-item:hover{
     font-size: 1.8rem;
     font-weight: 400;
 }
+
