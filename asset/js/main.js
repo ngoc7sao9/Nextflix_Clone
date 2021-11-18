@@ -26,7 +26,8 @@ const Login_btn=$('.login-btn');
 const ModalTag=$('.modal');
 const Header_navigate=$('.header-navigate-btn');
 const Headeritem=$('.header-navigate');
-console.log(Search)
+console.log(Search);
+var query;
 // console.log(Bodytag)
 let MaxPage=50;
 let currentpage=1;
@@ -37,20 +38,18 @@ GetMovie();
 GetTrending(Trending_URL_week,List_trending)
 GetlistGenres(List_geners,genre_list);
 GetTvShow(Tv_URL,TV_section)
+// huy
 ControlPage();
 SearchTag();
 SearchFeature();
+// hiếu
 Modal();
 NavigateonMobile();
 FormHandle();
 FooterItem();
-AnimateHeader();
-function AnimateHeader(){
-    
-    // if(){
+//vũ
 
-    // }
-}
+
 
 function Get(id){
     console.log(id)
@@ -62,7 +61,6 @@ function Get(id){
 // ${BASE_URL}/movie/${id}/videos?${api_key}
 
 function GetListMovieGenresBy(id){
-    ControlPage(GetListMovieGenresBy);
     IdCur=id;
 
     fetch(`${BASE_URL}/discover/movie?${api_key}&with_genres=${id}&page=${currentpage}`)
@@ -73,8 +71,8 @@ function GetListMovieGenresBy(id){
         
      let htmls= items.results.map(function(item){
            return `
-           <div id="${item.id}" class="gener-tag-list-item moive-item col l-3 m-4 c-6"  >
-                    <div class="gener-tag-list-item-img" style="background-image: url(https://image.tmdb.org/t/p/original${item.poster_path});">
+           <div id="${item.id}" class="gener-tag-list-item moive-item  col l-3 m-4 c-6"  >
+                    <div class="gener-tag-list-item-img" style="background-image: url(https://image.tmdb.org/t/p/w500${item.poster_path});">
                           <div class="gener-tag-list-item-action">
                           <i class="fas fa-play-circle"></i>
                     
@@ -104,6 +102,21 @@ function GetListMovieGenresBy(id){
        })
        Movie_Geners.innerHTML=htmls.join('');
     })
+    .finally(function(){
+        const play=$$('.moive-item');
+        play.forEach(function(item){
+            item.onclick=function(){
+                console.log(("Get movie"));
+                let id=item.getAttribute('id');
+                $('iframe').src=`https://www.2embed.ru/embed/tmdb/movie?id=${id}`;
+                $('.modal-detail').classList.add('acitve');
+                document.onclick=function(e){
+                    e.preventDefault();
+                }
+                console.log($('.modal-detail').classList.contains('active'));
+            }
+        })
+    })
 
 }
 
@@ -120,7 +133,7 @@ function GetTrending(URL,path){
         let htmls=items.results.slice(0,14).map(function(item,idx){
             return `
             <li id="${item.id}" class="section-trending-item moive-item col l-2 m-3 c-6" >
-             <div class="section-trending-img" style="background-image: url(https://image.tmdb.org/t/p/original${item.poster_path});"></div>
+             <div class="section-trending-img" style="background-image: url(https://image.tmdb.org/t/p/w500${item.poster_path});"></div>
              <div class="overview-contend"><i class="fas fa-play-circle"></i></div>
             </li> 
             
@@ -179,8 +192,7 @@ function GetTvShow(URL,path){
     })
 }
 
-function GetMovie(id){
-
+function GetMovie(){
 
     console.log(`${BASE_URL}/discover/movie?sort_by=popularity.desc&${api_key}&page=${currentpage}`)
     fetch(`${BASE_URL}/discover/movie?sort_by=popularity.desc&${api_key}&page=${currentpage}`).then(function(res){
@@ -192,7 +204,7 @@ function GetMovie(id){
            <div id="${item.id}" class="gener-tag-list-item moive-item col l-3 m-4 c-6">
                     <div class="gener-tag-list-item-img" style="background-image: url(https://image.tmdb.org/t/p/w500/${item.poster_path});">
                           <div class="gener-tag-list-item-action">
-                          <i class="fas fa-play-circle"></i>
+                          <i class="fas playbtn fa-play-circle"></i>
                     
                         </div>
                     
@@ -220,12 +232,30 @@ function GetMovie(id){
        })
        Movie_Geners.innerHTML=htmls.join('');
     })
-   
+    .finally(function(){
+        const play=$$('.gener-tag-list-item.moive-item');
+        console.log(play);
+        play.forEach(function(item){
+            item.onclick=function(){
+                console.log(("Get movie"));
+                let id=item.getAttribute('id');
+                $('iframe').src=`https://www.2embed.ru/embed/tmdb/movie?id=${id}`;
+                $('.modal-detail').classList.add('acitve');
+                document.onclick=function(e){
+                    e.preventDefault();
+                }
+                console.log($('.modal-detail').classList.contains('active'));
+            }
+        })
+    })
     
 }
+ControlPage(GetListMovieGenresBy);
 ControlPage(GetMovie);
+
 function ControlPage(Callback){
     
+
     NextBtn.onclick=function(){
         // Movie_Geners.scrollIntoView({
         //     behavior:'smooth'
@@ -233,6 +263,8 @@ function ControlPage(Callback){
         if(currentpage<MaxPage) {
             currentpage++;
             NumCur.innerText=currentpage;
+            console.log(Callback)
+
             Callback(IdCur);
         }else{
             currentpage=1;
@@ -272,7 +304,6 @@ function SearchTag(){
             $('.nav-left input').focus();
         }else{
             $('.nav-left input').blur();
-
         }
     }
 
@@ -299,7 +330,7 @@ function SearchKeyWord(string){
         {
             let htmls= items.results.map(function(item){
                 return `
-                <div id="${item.id}" class="gener-tag-list-item moive-item col l-3 m-4 c-6">
+                <div id="${item.id}"   class="gener-tag-list-item moive-item col l-3 m-4 c-6" >
                          <div class="gener-tag-list-item-img" style="background-image: url(https://image.tmdb.org/t/p/original${item.poster_path});">
                                <div class="gener-tag-list-item-action">
                                <i class="fas fa-play-circle"></i>
@@ -334,11 +365,27 @@ function SearchKeyWord(string){
 
 
     })
+    .finally(function(){
+        const play=$$('.gener-tag-list-item.moive-item');
+        console.log(play);
+        play.forEach(function(item){
+            item.onclick=function(){
+                console.log(("Get movie"));
+                let id=item.getAttribute('id');
+                $('iframe').src=`https://www.2embed.ru/embed/tmdb/movie?id=${id}`;
+                $('.modal-detail').classList.add('acitve');
+
+                document.onclick=function(e){
+                    e.preventDefault();
+                }
+                console.log($('.modal-detail').classList.contains('active'));
+            }
+        })
+    })
 }
 
-// console.log($$('.moive-item'))
 function SearchFeature(){
-    let query,flag=0;
+    let flag=0;
     Search.onchange=function(e){
         // console.log(e)
         query=e.target.value;
@@ -369,6 +416,15 @@ function SearchFeature(){
 }
 
 function Modal(){
+    ///Xử lý khung chi tiết phim
+    $('.modal-detail').onclick=function(){
+        console.log(123)
+        $('.modal-detail').classList.remove('acitve')
+        $('iframe').src="";
+        // this.style.display='none';
+    }
+
+    //Xử lý khung đăng nhập đăng ký
     Login_btn.onclick=function(){
         ModalTag.classList.toggle('open');
     }
@@ -436,3 +492,6 @@ function FooterItem(){
     })
 }
 
+function GetDetail(id){
+    
+}
