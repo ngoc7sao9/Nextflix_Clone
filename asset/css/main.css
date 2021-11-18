@@ -137,9 +137,11 @@ header .nav-left input{
     display: none;
     animation: SlideDown ease-in-out 400ms forwards;
 }
+
 header .nav-left.active input{
     display: block;
 }
+
 @keyframes SlideDown{
     from{
         opacity: 0;
@@ -803,3 +805,30 @@ footer .footer-list .footer-item:hover{
     font-weight: 400;
 }
 
+.modal-detail{
+  
+    display: none;
+    z-index: 3;
+
+}
+.modal-detail.acitve{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000000c2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.modal-detail .modal-detail-container{
+    width: 80%;
+    height: 90%;
+    background-color: #fff;
+} 
+
+.modal-detail .modal-detail-container iframe{
+    width: 100%;
+    height: 100%;
+}
