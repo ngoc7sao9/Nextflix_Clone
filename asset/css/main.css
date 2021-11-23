@@ -447,6 +447,13 @@ header .nav-left .user-profile .user-profile-subnav .user-profile-subnab-item:ho
     color: #fff;
     /* position: relative;    */
 }
+/* Hades */
+.Container .gener-tag-list .gener-tag-list-item-contend{
+    padding: inherit;
+    text-align: center;
+    margin-top: 10px;
+}
+/* Hades */
 .Container .gener-tag-list .gener-tag-list-item .gener-tag-list-item-action  {
     font-size: 6rem;
     color: rgb(255, 255, 255);
