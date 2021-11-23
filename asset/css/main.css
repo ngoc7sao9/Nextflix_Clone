@@ -442,7 +442,7 @@ header .nav-left .user-profile .user-profile-subnav .user-profile-subnab-item:ho
     padding: 20px;
 }
 .Container .gener-tag-list .gener-tag-list-item{
-    height: 500px;
+    height: 400px;
     word-wrap: break-word;
     color: #fff;
     /* position: relative;    */
